@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Zoom Image Only</title>
+    <!-- Include Hammer.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+    <style>
+        .image-container {
+            max-width: 50%;
+            max-height: 50vh;
+            overflow: hidden;
+        }
+
+        .image-container img {
+            display: block;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="image-container" id="image-container">
+        <img src="https://images.pexels.com/photos/17920141/pexels-photo-17920141/free-photo-of-man-on-paddle-board-on-sea-shore.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            alt="Your Image">
+    </div>
+
+    <script>
+        // Get the image container element
+        var imageContainer = document.getElementById('image-container');
+
+        // Initialize Hammer.js on the image container
+        var mc = new Hammer.Manager(imageContainer);
+
+        // Enable pinch to zoom
+        mc.add(new Hammer.Pinch());
+
+        // Add event listener for pinch events
+        mc.on('pinch', function (ev) {
+            // Scale the image based on pinch gesture
+            var scale = Math.max(1, Math.min(ev.scale, 4));
+            imageContainer.style.transform = 'scale(' + scale + ')';
+        });
+
+        // Reset image scale when pinch ends
+        mc.on('pinchend', function () {
+            imageContainer.style.transform = 'scale(1)';
+        });
+    </script>
+</body>
+
+</html>
