@@ -40,7 +40,8 @@
         // Add event listener for pinch events
         mc.on('pinch', function (ev) {
             // Scale the image based on pinch gesture
-            var scale = Math.max(1, Math.min(ev.scale, 4));
+            // var scale = Math.max(1, Math.min(ev.scale, 4));
+            var scale = ev.scale;
             imageContainer.style.transform = 'scale(' + scale + ')';
         });
 
